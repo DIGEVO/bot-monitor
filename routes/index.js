@@ -1,9 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+router.get('/', (req, res, next) =>
+//res.redirect(`https://${req.get('host')}/intents`));
+res.redirect('/monitor'));
 
 module.exports = router;

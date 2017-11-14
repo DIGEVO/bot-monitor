@@ -1,0 +1,44 @@
+extends botlist
+
+block responses
+    div(class='col-8' style = 'border: 1px solid black;')
+        form(class='form-group filter-form' method='POST' action='/monitor/responses')
+            div(class='col-sm-3')
+                input(type="text" class="form-control" id='username' placeholder='Nombre')
+            |   <br>
+            div(class='col-sm-3')
+                input(type='text' class="form-control" id="startdate" placeholder='Fecha de inicio')
+            |   <br>
+            div(class='col-sm-3')
+                input(type='text' class="form-control" id="enddate" placeholder='Fecha de fin')
+            |   <br>
+            button(type='submit' class='btn btn-primary')   Filtrar
+
+        div(class='div-limiter')
+            table(class='table table-sm table-bordered')
+                col(width='10%')
+                col(width='10%')
+                col(width='10%')
+                col(width='40%')
+                col(width='10%')
+                col(width='10%')
+                col(width='10%')
+                thead
+                    tr(class="header")
+                        th(scope='col') User Id
+                        th(scope='col') User Name
+                        th(scope='col') Date
+                        th(scope='col') Query
+                        th(scope='col') Action
+                        th(scope='col') Intent Id
+                        th(scope='col') Bot Id
+                tbody
+                    each obj in responses
+                        tr
+                            td  #{obj.userId}
+                            td  #{obj.userName}
+                            td  #{new Date(obj.ts).toLocaleDateString()}
+                            td  #{obj.query}
+                            td  #{obj.action}
+                            td  #{obj.intentId}
+                            td  #{obj.botId}

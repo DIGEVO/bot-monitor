@@ -6,6 +6,6 @@ const router = express.Router();
 const monitorController = require('../controllers/monitorController.js');
 
 router.get('/', monitorController.botListGET);
-router.post('/users', monitorController.userListPOST);
+router.post('/responses', monitorController.responseListPOST);
 
 module.exports = router;

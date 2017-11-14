@@ -1,0 +1,53 @@
+extends layout
+
+block bots
+    div(class='container-fluid starter-template' )
+        div(class='row row-first')
+            div(class='col')
+                - var msg = '';
+                if errors
+                    for error in errors
+                        - msg= msg + error.msg + '<br>';
+
+                h3  Por favor, seleccione el bot
+                | <br>
+
+                form(class='form-group bot-form' method='POST' action='/monitor/responses')                
+                    ul(id='botlist')
+                        each obj in bots
+                            li
+                                input(type='radio' name='id' value=obj.id)
+                                b   #{obj.name} 
+                                |   (#{obj.id}) 
+                                span(class='badge badge-secondary' data-toggle="tooltip" data-placement="top" title=`${obj.count} respuestas`) #{obj.count}
+                            li
+                                input(type='radio' name='id' value=obj.id)
+                                b   #{obj.name} 
+                                |   (#{obj.id}) 
+                                span(class='badge badge-secondary' data-toggle="tooltip" data-placement="top" title=`${obj.count} respuestas`) #{obj.count}
+                            li
+                                input(type='radio' name='id' value=obj.id)
+                                b   #{obj.name} 
+                                |   (#{obj.id}) 
+                                span(class='badge badge-secondary' data-toggle="tooltip" data-placement="top" title=`${obj.count} respuestas`) #{obj.count}
+                            li
+                                input(type='radio' name='id' value=obj.id)
+                                b   #{obj.name} 
+                                |   (#{obj.id}) 
+                                span(class='badge badge-secondary' data-toggle="tooltip" data-placement="top" title=`${obj.count} respuestas`) #{obj.count}
+                            li
+                                input(type='radio' name='id' value=obj.id)
+                                b   #{obj.name} 
+                                |   (#{obj.id}) 
+                                span(class='badge badge-secondary' data-toggle="tooltip" data-placement="top" title=`${obj.count} respuestas`) #{obj.count}
+                            
+                    |   <br>
+
+                    button(type='submit' class='btn btn-primary')   Cargar respuestas            
+                    input(type='hidden' name='sessionid' value=sessionid)
+                    |   <br>
+                    |   <br>                    
+                    div(class=`${errors?'alert alert-danger':''}` role="alert") !{msg}
+            block responses  
+            
+

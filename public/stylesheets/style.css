@@ -1,10 +1,14 @@
+html {
+  height: 100%;
+}
+
 body {
   padding-top: 5rem;
+  height: 100%;
 }
 
 .starter-template {
   padding: 3rem 1.5rem; 
-  /* text-align: center; */
 }
 
 .footer {
@@ -42,6 +46,62 @@ body {
 }
 
 .height-limiter {
-  height: 250px;
-  overflow-y:scroll;
+  height: inherit;
+  overflow-y:auto;
 }
+
+.div-limiter {
+  width: 100%;
+  height: 65%;
+  overflow-y:auto;
+}
+
+.div-limiter-left {
+  width: 100%;
+  height: 30%;
+}
+
+.table {
+  table-layout: fixed;
+  height: 100%;
+  width: 100%;  
+}
+
+td {
+  overflow-wrap: break-word;
+}
+
+th {
+  text-align: center;
+}
+
+.container-fluid {
+  height: 100%;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.row {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.row-first {
+  height:95%;
+  /* overflow: hidden; */
+}
+
+.col {
+  height: 100%;
+}
+
+ul {
+  height:80%;
+  overflow-y:auto;
+}
+
+.bot-form {
+  height: 100%;
+}
+
+/* -------------------- */

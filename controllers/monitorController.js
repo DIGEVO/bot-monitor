@@ -5,7 +5,7 @@ const mongoUtil = require('../libs/mongoutil');
 
 exports.botListGET = (req, res, next) => mongoUtil.botList(req, res);
 
-exports.responseListPOST = (req, res, next) => {
+exports.conversationListPOST = (req, res, next) => {
     req.checkBody('id', 'Se necesita que seleccione un bot').notEmpty();
 
     const errors = req.validationErrors();
@@ -15,6 +15,6 @@ exports.responseListPOST = (req, res, next) => {
         return;
     }
 
-    mongoUtil.responseList(req, res);
+    mongoUtil.conversationList(req, res);
 };
 

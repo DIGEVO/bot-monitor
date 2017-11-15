@@ -8,7 +8,7 @@ body {
 }
 
 .starter-template {
-  padding: 3rem 1.5rem; 
+  padding: 3rem 1.5rem;  
 }
 
 .footer {
@@ -86,9 +86,8 @@ th {
   margin-right: 0px;
 }
 
-.row-first {
+.height-limiter-95 {
   height:95%;
-  /* overflow: hidden; */
 }
 
 .col {
@@ -105,3 +104,33 @@ ul {
 }
 
 /* -------------------- */
+
+/* .table-responsive {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.table {
+  table-layout: fixed;
+  width: 100px;
+}
+
+.table td {
+  overflow: hidden;
+} */
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -ms-user-select: none;
+}
+
+.pager .prev, .pager .next, .pagecount {
+  cursor: pointer;
+}

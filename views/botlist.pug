@@ -1,8 +1,10 @@
 extends layout
 
-block bots
+block content
     div(class='container-fluid starter-template' )
-        div(class='row row-first')
+        div(class='row height-limiter-95')
+            div(class='col')
+
             div(class='col')
                 - var msg = '';
                 if errors
@@ -16,38 +18,16 @@ block bots
                     ul(id='botlist')
                         each obj in bots
                             li
-                                input(type='radio' name='id' value=obj.id)
+                                input(type='radio' name='id' value=obj._id)
                                 b   #{obj.name} 
-                                |   (#{obj.id}) 
+                                |   (#{obj._id}) 
                                 span(class='badge badge-secondary' data-toggle="tooltip" data-placement="top" title=`${obj.count} respuestas`) #{obj.count}
-                            li
-                                input(type='radio' name='id' value=obj.id)
-                                b   #{obj.name} 
-                                |   (#{obj.id}) 
-                                span(class='badge badge-secondary' data-toggle="tooltip" data-placement="top" title=`${obj.count} respuestas`) #{obj.count}
-                            li
-                                input(type='radio' name='id' value=obj.id)
-                                b   #{obj.name} 
-                                |   (#{obj.id}) 
-                                span(class='badge badge-secondary' data-toggle="tooltip" data-placement="top" title=`${obj.count} respuestas`) #{obj.count}
-                            li
-                                input(type='radio' name='id' value=obj.id)
-                                b   #{obj.name} 
-                                |   (#{obj.id}) 
-                                span(class='badge badge-secondary' data-toggle="tooltip" data-placement="top" title=`${obj.count} respuestas`) #{obj.count}
-                            li
-                                input(type='radio' name='id' value=obj.id)
-                                b   #{obj.name} 
-                                |   (#{obj.id}) 
-                                span(class='badge badge-secondary' data-toggle="tooltip" data-placement="top" title=`${obj.count} respuestas`) #{obj.count}
-                            
+                                |   &nbsp;
+                                span(class='badge badge-primary' data-toggle="tooltip" data-placement="top" title=`${obj.conversations} conversaciones`) #{obj.conversations}                               
                     |   <br>
-
-                    button(type='submit' class='btn btn-primary')   Cargar respuestas            
-                    input(type='hidden' name='sessionid' value=sessionid)
+                    button(type='submit' class='btn btn-primary')   Cargar conversaciones                                
                     |   <br>
                     |   <br>                    
                     div(class=`${errors?'alert alert-danger':''}` role="alert") !{msg}
-            block responses  
-            
 
+            div(class='col')

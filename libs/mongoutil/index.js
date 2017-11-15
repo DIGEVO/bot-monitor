@@ -6,57 +6,91 @@ const cache = new NodeCache();
 
 exports.botListQuery = db =>
     db
-        .collection('apiai_responses').aggregate([{
-            $group: {
-                _id: { id: '$address.bot.id', name: '$address.bot.name' },
-                count: { $sum: 1 }
+        .collection('apiai_responses').aggregate([
+            {
+                $group: {
+                    _id: { id: '$address.bot.id', name: '$address.bot.name' },
+                    count: { $sum: 1 },
+                    conversations: { $addToSet: '$address.conversation.id' }
+                }
+            },
+            {
+                $project: {
+                    _id: '$_id.id',
+                    name: '$_id.name',
+                    count: '$count',
+                    conversations: { $size: '$conversations' }
+                }
             }
-        }])
+        ])
         .toArray()
     ;
 
 exports.botList = (req, res, errors = undefined) => {
     mongoClient.processQuery(
         exports.botListQuery,
-        bots => {
-            const _bots = bots.map(o => ({ id: o._id.id, name: o._id.name, count: o.count }));
-            cache.set(req.id, _bots);
-            res.render('botlist', { bots: _bots, errors: errors, sessionid: req.id });
-        }
+        bots => res.render('botlist', { bots: bots, errors: errors })
     );
 }
 
-exports.responseListQuery = (botId, db) =>
+exports.conversationListQuery = (botId, db) =>
     db
         .collection('apiai_responses').aggregate([
             {
-                $match: {
-                    'address.bot.id': botId
+                $match: { 'address.bot.id': botId }
+            },
+            {
+                $group: {
+                    _id: { conversationid: '$address.conversation.id', botid: '$address.bot.id' },
+                    count: { $sum: 1 },
+                    ts: { $addToSet: { $substr: ['$timestamp', 0, 10] } },
+                    users: { $addToSet: { $concat: ['$address.user.name', '(', '$address.user.id', ')'] } },
+                    queries: {
+                        $push: {
+                            ts: '$timestamp',
+                            userid: '$address.user.id',
+                            username: '$address.user.name',
+                            query: '$result.resolvedQuery',
+                            action: '$result.action',
+                            intentname: '$result.metadata.intentName',
+                            botid: '$address.bot.id'
+                        }
+                    }
                 }
             },
             {
                 $project: {
-                    ts: '$timestamp',
-                    userId: '$address.user.id',
-                    userName: '$address.user.name',
-                    query: '$result.resolvedQuery',
-                    action: '$result.action',
-                    intentId: '$result.metadata.intentId',
-                    botId: '$address.bot.id'
+                    _id: '$_id.conversationid',
+                    botid: '$_id.botid',
+                    ts: {
+                        $reduce: {
+                            input: { $slice: ['$ts', 1, { $size: '$ts' }] },
+                            initialValue: { $arrayElemAt: ['$ts', 0] },
+                            in: { $concat: ['$$value', ', ', '$$this'] }
+                        }
+                    },
+                    queries: '$queries',
+                    count: '$count',
+                    users: {
+                        $reduce: {
+                            input: { $slice: ['$users', 1, { $size: '$users' }] },
+                            initialValue: { $arrayElemAt: ['$users', 0] },
+                            in: { $concat: ['$$value', ', ', '$$this'] }
+                        }
+                    }
                 }
-            }])
+            }
+        ])
         .toArray()
     ;
 
-exports.responseList = (req, res, errors = undefined) => {
+exports.conversationList = (req, res) => {
     mongoClient.processQuery(
-        exports.responseListQuery.bind(null, req.body.id),
-        responses => {
-            const _bots = cache.get(req.body.sessionid) || [];
-            res.render('responselist', {
-                bots: _bots, errors: errors,
-                sessionid: req.body.sessionid, responses: responses
-            });
+        exports.conversationListQuery.bind(null, req.body.id),
+        conversations => {
+            
+            //cache.get(req.body.sessionid) || [];
+            res.render('conversationlist', { conversations: conversations });
         }
     );
 }        

@@ -1,0 +1,46 @@
+extends layout
+
+block content
+    div(class='container-fluid starter-template' )
+        div(class='row botlist-row')
+            div(class='col')
+
+            div(class='col-lg-8')
+                table(class="tablesorter")
+                    thead
+                        tr
+                            th  Conversación
+                            th  Bot Id
+                            th  Fechas
+                            th  Usuarios
+                            th  Respuestas
+                    tfoot
+                        tr
+                            th  Conversación
+                            th  Bot Id
+                            th  Fechas
+                            th  Usuarios
+                            th  Respuestas
+                    tbody
+                        each c in conversations
+                            tr
+                                td  #{c._id}
+                                td  #{c.botid} 
+                                td  #{c.ts}
+                                td  #{c.users}
+                                td  #{c.count}
+ 
+                div(class="pager")
+                    img(src="/addons/pager/icons/first.png" class="first" alt="First")
+                    img(src="/addons/pager/icons/prev.png" class="prev" alt="Prev")                    
+                    span(class="pagedisplay" data-pager-output-filtered="{startRow:input} &ndash; {endRow} / {filteredRows} of {totalRows} total rows")
+                    img(src="/addons/pager/icons/next.png" class="next" alt="Next")
+                    img(src="/addons/pager/icons/last.png" class="last" alt="Last")
+                    select(class="pagesize" title="Select page size")
+                        option(value="10")  10
+                        option(value="20")  20
+                        option(value="30")  30
+                        option(value="all") All Rows
+                    select(class="gotoPage" title="Select page number")
+
+            div(class='col')

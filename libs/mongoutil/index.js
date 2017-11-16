@@ -43,6 +43,7 @@ exports.conversationListQuery = (botId, db) =>
                 $group: {
                     _id: { conversationid: '$address.conversation.id', botid: '$address.bot.id' },
                     count: { $sum: 1 },
+                    fallback: { $sum: { $cond: [{ $eq: ['Default Fallback Intent', '$result.metadata.intentName'] }, 1, 0] } },
                     ts: { $addToSet: { $substr: ['$timestamp', 0, 10] } },
                     users: { $addToSet: { $concat: ['$address.user.name', '(', '$address.user.id', ')'] } },
                     queries: {
@@ -71,6 +72,8 @@ exports.conversationListQuery = (botId, db) =>
                     },
                     queries: '$queries',
                     count: '$count',
+                    fallback: '$fallback',
+                    percent: {$divide: ['$fallback','$count']},
                     users: {
                         $reduce: {
                             input: { $slice: ['$users', 1, { $size: '$users' }] },
@@ -88,8 +91,6 @@ exports.conversationList = (req, res) => {
     mongoClient.processQuery(
         exports.conversationListQuery.bind(null, req.body.id),
         conversations => {
-            
-            //cache.get(req.body.sessionid) || [];
             res.render('conversationlist', { conversations: conversations });
         }
     );

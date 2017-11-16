@@ -8,7 +8,7 @@ body {
 }
 
 .starter-template {
-  padding: 3rem 1.5rem;  
+  padding: 2rem 1.5rem;  
 }
 
 .footer {
@@ -103,22 +103,6 @@ ul {
   height: 100%;
 }
 
-/* -------------------- */
-
-/* .table-responsive {
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-.table {
-  table-layout: fixed;
-  width: 100px;
-}
-
-.table td {
-  overflow: hidden;
-} */
-
 .left {
   float: left;
 }
@@ -133,4 +117,10 @@ ul {
 
 .pager .prev, .pager .next, .pagecount {
   cursor: pointer;
+}
+
+canvas {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
 }

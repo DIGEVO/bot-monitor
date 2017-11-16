@@ -22,12 +22,15 @@ html(lang='es')
             
     block content
 
-    footer(class='footer')
+    footer(class='footer navbar-fixed-bottom')
       div(class='container')
         span(class='text-muted')=  '© DIGEVO ' + new Date().getFullYear()
     
     script(src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js")
     script(src="/javascripts/tablesorter/jquery.tablesorter.js")
     script(src="/javascripts/tablesorter/jquery.tablesorter.widgets.js")
     script(src="/addons/pager/jquery.tablesorter.pager.js")
-    script(src="/javascripts/main.js")
+    script(src="/javascripts/widgets.js")
+    script(src="/javascripts/events.js")
+    script(src="/javascripts/chartutils.js")

@@ -1,34 +1,53 @@
 extends layout
 
 block content
-    div(class='container-fluid starter-template' )
-        div(class='row botlist-row')
+    div(class='starter-template' )
+        div(class='row')
             div(class='col')
 
-            div(class='col-lg-8')
-                table(class="tablesorter")
+            div(class='' id='conversations' style='display:block;')
+                div(class="" style='text-align:center;')
+                    a(href="/monitor" class="btn btn-primary btn-sm" role="button")  Regresar
+            
+                table(class="tablesorter" id='conversationstable')
+                    //- col(width="10%")
+                    //- col(width="10%")
+                    //- col(width="35%")
+                    //- col(width="40%")
+                    //- col(width="5%")
                     thead
                         tr
                             th  Conversación
                             th  Bot Id
                             th  Fechas
                             th  Usuarios
-                            th  Respuestas
+                            //- th  Total Rptas.
+                            //- th  Total Fallidas
+                            th  % Fallidas
+                            th  Gráfico
                     tfoot
                         tr
                             th  Conversación
                             th  Bot Id
                             th  Fechas
                             th  Usuarios
-                            th  Respuestas
+                            //- th  Total Rptas.
+                            //- th  Total Fallidas
+                            th  % Fallidas
+                            th  Gráfico
                     tbody
                         each c in conversations
-                            tr
+                            tr(data-queries=c.queries data-total=c.count data-fallback=c.fallback)
                                 td  #{c._id}
                                 td  #{c.botid} 
                                 td  #{c.ts}
                                 td  #{c.users}
-                                td  #{c.count}
+                                //- td  #{c.count}
+                                //- td  #{c.fallback}
+                                td  #{`${(parseFloat(c.percent)*100).toFixed(2)}%`}
+                                td
+                                    div(style="width:80px;")
+                                        canvas
  
                 div(class="pager")
                     img(src="/addons/pager/icons/first.png" class="first" alt="First")
@@ -38,9 +57,49 @@ block content
                     img(src="/addons/pager/icons/last.png" class="last" alt="Last")
                     select(class="pagesize" title="Select page size")
                         option(value="10")  10
-                        option(value="20")  20
-                        option(value="30")  30
-                        option(value="all") All Rows
+                    select(class="gotoPage" title="Select page number")
+            
+            div(class='' id='details' style='display:none;')
+                div(class='' style='text-align:center;')
+                    a(href="javascript:showConversations()" class="btn btn-primary btn-sm" role="button")  Regresar
+
+                table(class="tablesorter" id='responsestable')
+                        col(width="10%")
+                        col(width="10%")
+                        col(width="15%")
+                        col(width="30%")
+                        col(width="10%")
+                        col(width="15%")
+                        col(width="10%")
+                        thead
+                            tr
+                                th  Fecha
+                                th  User Id
+                                th  User Name
+                                th  Query
+                                th  Action
+                                th  Intent Name
+                                th  Bot Id
+                        tfoot
+                            tr
+                                th  Fecha
+                                th  User Id
+                                th  User Name
+                                th  Query
+                                th  Action
+                                th  Intent Name
+                                th  Bot Id
+                        tbody
+                        //- responses
+    
+                div(class="pager")
+                    img(src="/addons/pager/icons/first.png" class="first" alt="First")
+                    img(src="/addons/pager/icons/prev.png" class="prev" alt="Prev")                    
+                    span(class="pagedisplay" data-pager-output-filtered="{startRow:input} &ndash; {endRow} / {filteredRows} of {totalRows} total rows")
+                    img(src="/addons/pager/icons/next.png" class="next" alt="Next")
+                    img(src="/addons/pager/icons/last.png" class="last" alt="Last")
+                    select(class="pagesize" title="Select page size")
+                        option(value="10")  10
                     select(class="gotoPage" title="Select page number")
 
             div(class='col')

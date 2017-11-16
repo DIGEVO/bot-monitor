@@ -81,8 +81,6 @@ function addRowHandlers() {
 window.onload = addRowHandlers();
 
 $(document).ready(function () {
-    var table1 = $('#conversationstable');
-    table1.trigger('update');
 
     var table = document.getElementById("conversationstable");
     if (table) {
@@ -99,6 +97,11 @@ $(document).ready(function () {
                 }
             }
         }
+
+        var table1 = $('#conversationstable');
+        table1.trigger("updateAll");
+        var sorting = [[4, 1]];
+        table1.trigger("sorton", [sorting]);
     }
 
     const date1 = document.getElementById('date1');

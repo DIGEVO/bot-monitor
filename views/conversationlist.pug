@@ -10,19 +10,12 @@ block content
                     a(href="/monitor" class="btn btn-primary btn-sm" role="button")  Regresar
             
                 table(class="tablesorter" id='conversationstable')
-                    //- col(width="10%")
-                    //- col(width="10%")
-                    //- col(width="35%")
-                    //- col(width="40%")
-                    //- col(width="5%")
                     thead
                         tr
                             th  Conversación
                             th  Bot Id
                             th  Fechas
                             th  Usuarios
-                            //- th  Total Rptas.
-                            //- th  Total Fallidas
                             th  % Fallidas
                             th  Gráfico
                     tfoot
@@ -31,8 +24,6 @@ block content
                             th  Bot Id
                             th  Fechas
                             th  Usuarios
-                            //- th  Total Rptas.
-                            //- th  Total Fallidas
                             th  % Fallidas
                             th  Gráfico
                     tbody
@@ -42,8 +33,6 @@ block content
                                 td  #{c.botid} 
                                 td  #{c.ts}
                                 td  #{c.users}
-                                //- td  #{c.count}
-                                //- td  #{c.fallback}
                                 td  #{`${(parseFloat(c.percent)*100).toFixed(2)}%`}
                                 td
                                     div(style="width:80px;")

@@ -24,6 +24,17 @@ block content
                                 span(class='badge badge-secondary' data-toggle="tooltip" data-placement="top" title=`${obj.count} respuestas`) #{obj.count}
                                 |   &nbsp;
                                 span(class='badge badge-primary' data-toggle="tooltip" data-placement="top" title=`${obj.conversations} conversaciones`) #{obj.conversations}                               
+                    div(class='row')
+                        div(class='col')
+                            label   Fecha de Inicio
+                        div(class='col')
+                            label   Fecha de Fin
+                    div(class='row')
+                        div(class='col')
+                            input(id="date1" name="date1" type="date" required="required")                            
+                        div(class='col')
+                            input(id="date2" name="date2" type="date" required="required")
+
                     |   <br>
                     button(type='submit' class='btn btn-primary')   Cargar conversaciones                                
                     |   <br>

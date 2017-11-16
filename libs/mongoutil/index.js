@@ -33,11 +33,26 @@ exports.botList = (req, res, errors = undefined) => {
     );
 }
 
-exports.conversationListQuery = (botId, db) =>
+exports.conversationListQuery = (botId, date1, date2, db) =>
     db
         .collection('apiai_responses').aggregate([
             {
-                $match: { 'address.bot.id': botId }
+                $match: {
+                    $or: [
+                        {
+                            $and: [
+                                { 'address.bot.id': botId },
+                                { 'timestamp': { $gte: date1, $lte: date2 } }
+                            ]
+                        },
+                        {
+                            $and: [
+                                { 'address.bot.id': botId },
+                                { 'timestamp': new RegExp(date1 + '.*') }
+                            ]
+                        }
+                    ]
+                }
             },
             {
                 $group: {
@@ -73,7 +88,7 @@ exports.conversationListQuery = (botId, db) =>
                     queries: '$queries',
                     count: '$count',
                     fallback: '$fallback',
-                    percent: {$divide: ['$fallback','$count']},
+                    percent: { $divide: ['$fallback', '$count'] },
                     users: {
                         $reduce: {
                             input: { $slice: ['$users', 1, { $size: '$users' }] },
@@ -89,7 +104,7 @@ exports.conversationListQuery = (botId, db) =>
 
 exports.conversationList = (req, res) => {
     mongoClient.processQuery(
-        exports.conversationListQuery.bind(null, req.body.id),
+        exports.conversationListQuery.bind(null, req.body.id, req.body.date1, req.body.date2),
         conversations => {
             res.render('conversationlist', { conversations: conversations });
         }

@@ -88,12 +88,17 @@ $(document).ready(function () {
     if (table) {
         var rows = table.getElementsByTagName("tr");
         //TODO fix loop!
-        for (i = 2; i < rows.length - 2; i++) {            
+        for (i = 2; i < rows.length - 2; i++) {
             var cells = table.rows[i].getElementsByTagName("td");
             const ctx = cells[5].getElementsByTagName("canvas")[0].getContext("2d");
             new Chart(ctx, getConfiguration(table.rows[i]));
         }
     }
+
+    const date1 = document.getElementById('date1');
+    if (date1) date1.value = new Date().toDateInputValue();
+    const date2 = document.getElementById('date2');
+    if (date2) date2.value = new Date().toDateInputValue();
 });
 
 function getConfiguration(row) {
@@ -123,3 +128,10 @@ function getConfiguration(row) {
         }
     };
 }
+
+Date.prototype.toDateInputValue = (function () {
+    var local = new Date(this);
+    local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+    return local.toJSON().slice(0, 10);
+});
+

@@ -1,8 +1,9 @@
 extends layout
 
 block content
-  h1= message
-  h2= error.status
-  pre #{error.stack}
-  a(href='/monitor') Inicio
+  div(class='container-fluid starter-template' style='padding-left:2rem')
+    h1= message
+    h2= error.status
+
+    a(href='/monitor' class="btn btn-primary btn-sm" role="button") Inicio
   

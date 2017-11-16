@@ -88,10 +88,16 @@ $(document).ready(function () {
     if (table) {
         var rows = table.getElementsByTagName("tr");
         //TODO fix loop!
-        for (i = 2; i < rows.length - 2; i++) {
+        for (i = 0; i < rows.length; i++) {
             var cells = table.rows[i].getElementsByTagName("td");
-            const ctx = cells[5].getElementsByTagName("canvas")[0].getContext("2d");
-            new Chart(ctx, getConfiguration(table.rows[i]));
+
+            if (cells.length) {
+                const canvasCell = cells[5].getElementsByTagName("canvas");
+                if (canvasCell.length) {
+                    const ctx = canvasCell[0].getContext("2d");
+                    new Chart(ctx, getConfiguration(table.rows[i]));
+                }
+            }
         }
     }
 

@@ -1,14 +1,17 @@
 'use strict';
 
 const express = require('express');
-const router = express.Router();
-
 const { check } = require('express-validator/check');
+const {requireRole} = require('../libs/security');
 
 const monitorController = require('../controllers/monitorController.js');
 
-router.get('/', monitorController.botListGET);
+const router = express.Router();
+
+router.get('/', requireRole('user'), monitorController.botListGET);
+
 router.post('/conversations', [
+    requireRole('user'),
     check('id', 'Se necesita que seleccione un bot').exists(),
     check('date1', 'Se necesita que seleccione una fecha de inicio').exists(),
     check('date2', 'Se necesita que seleccione una fecha de fin').exists(),

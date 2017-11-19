@@ -1,0 +1,16 @@
+extends layout
+
+block content
+    div(class='container starter-template')
+        if (!user)
+            a(href="/login") Ingresar
+            br
+            a(href="/register") Registrarse
+        if (user)
+            p You are currently logged in as #{user.username}
+            a(href="/logout") Salir
+
+
+
+
+

@@ -29,7 +29,7 @@ exports.botListQuery = db =>
 exports.botList = (req, res, errors = undefined) => {
     mongoClient.processQuery(
         exports.botListQuery,
-        bots => res.render('botlist', { bots: bots, errors: errors })
+        bots => res.render('botlist', { bots: bots, errors: errors, user: req.user.username, group: req.user.role.includes('admin') ? 0 : 1 })
     );
 }
 
@@ -106,7 +106,7 @@ exports.conversationList = (req, res) => {
     mongoClient.processQuery(
         exports.conversationListQuery.bind(null, req.body.id, req.body.date1, req.body.date2),
         conversations => {
-            res.render('conversationlist', { conversations: conversations });
+            res.render('conversationlist', { conversations: conversations, user: req.user.username, group: req.user.role.includes('admin') ? 0 : 1 });
         }
     );
 }        

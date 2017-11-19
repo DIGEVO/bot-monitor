@@ -1,0 +1,17 @@
+extends layout
+
+block content
+    div(class="container starter-template")
+        form(role='form' class="form-signin" action='/login' method='post')
+            h2(class="form-signin-heading") Ingrese por favor
+            br
+            label(for="username" class="sr-only") Email address
+            input(type="text" id="username" name='username' class="form-control" placeholder="Usuario" required autofocus)
+            br
+            label(for="password" class="sr-only")  Password
+            input(type="password" id="password" name='password' class="form-control" placeholder="Contraseña" required)
+            
+            button(class="btn btn-lg btn-primary btn-block" type="submit")  Ingresar
+            br
+            br
+            div(class=`${message.length?'alert alert-danger':''}` role="alert") !{message}

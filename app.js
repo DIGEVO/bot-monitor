@@ -16,6 +16,7 @@ const flash = require('connect-flash');
 
 const index = require('./routes/index');
 const monitor = require('./routes/monitor');
+const users = require('./routes/users');
 
 const app = express();
 
@@ -44,6 +45,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/monitor', monitor);
+app.use('/users', users);
 
 // passport config
 const Account = require('./models/account');
@@ -56,7 +58,7 @@ mongoose.connect('mongodb://localhost/passport_local_mongoose_express4');
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  const err = new Error('Not Found');
+  const err = new Error('No se encuentra el recurso.');
   err.status = 404;
   next(err);
 });

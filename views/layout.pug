@@ -24,13 +24,13 @@ html(lang='es')
         ul(class="navbar-nav mr-auto")
           if group >= 0
             li(class="nav-item")
-              a(class="nav-link" href="#")  Bots
+              a(class="nav-link" href="/monitor")  Bots
           if group >= 0
             li(class="nav-item")
-              a(class="nav-link" href="#")  Cambiar Contraseña
+              a(class="nav-link" href="/users/changepassword")  Cambiar Contraseña
           if group === 0
             li(class="nav-item")
-              a(class="nav-link" href="#") Gestionar Usuarios
+              a(class="nav-link" href="/users") Gestionar Usuarios
           
         div(class="form-inline mt-2 mt-md-0")
           label(class="mr-sm-2" style='color:white;') #{user}

@@ -6,7 +6,7 @@ const router = express.Router();
 router.get('/',
     (req, res) => {
         if(req.protocol === 'http')
-            res.redirect(`https://${req.host}/`);
+            res.redirect(`https://${req.host}`);
         else
             res.render('login', { message: req.flash('error'), user: '' });
     });

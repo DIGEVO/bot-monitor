@@ -56,7 +56,7 @@ passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
 
 // mongoose
-mongoose.connect(process.env.MONGODB_USERDB_URI);
+mongoose.connect(process.env.MONGODB_MONITOR);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

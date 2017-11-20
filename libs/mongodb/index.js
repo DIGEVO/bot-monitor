@@ -4,7 +4,7 @@ const MongoClient = require('mongodb').MongoClient;
 require('dotenv').config();
 
 exports.processQuery = (queryFn, processDataFn) => {
-    const url = `mongodb://${process.env.USER}:${process.env.PASSWORD}@${process.env.HOST}:27017/${process.env.DATABASE}?ssl=true`;
+    const url = process.env.MONGODB_RESPONSES;
 
     MongoClient.connect(url)
         .then(admin => {

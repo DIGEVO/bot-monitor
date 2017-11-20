@@ -6,7 +6,7 @@ block content
             div(class='col')
 
             div(class='col')
-                h3  Por favor, seleccione el usuario a editar
+                h3  Por favor, seleccione el usuario para editar o eliminar
                 | <br>
 
                 form(class='form-group bot-form' method='POST' action='/users/cruduser')                
@@ -19,8 +19,12 @@ block content
                     |   <br>
                     button(type='submit' name='add' value=1 class='btn btn-primary')   Adicionar
                     |   &nbsp&nbsp
-                    button(type='submit' name='edit' value=1 class='btn btn-primary')   Editar
+                    button(type='submit' name='edit' value=1 class='btn btn-secondary')   Editar
                     |   &nbsp&nbsp
-                    button(type='submit' name='remove' value=1 class='btn btn-primary')   Eliminar
+                    button(type='submit' name='remove' value=1 class='btn btn-secondary' onclick="return confirm('¿Está seguro de eliminar el usuario seleccionado?');")   Eliminar
+                    br
+                    br
+                    div(class=`${message.length?'alert alert-danger':''}` role="alert") !{message}
 
             div(class='col')
+

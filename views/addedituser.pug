@@ -1,0 +1,27 @@
+extends layout
+
+block content
+    div(class='container starter-template')        
+        form(role='form' class='form-signin' action=`/users/${action}` method="post")
+            h2(class="form-signin-heading") #{header}
+            div(class='form-group')
+                input(class='form-control' type='text' name="username" value=`${editingUser}` placeholder='Usuario' readonly=!!readonly)
+            div(class='form-group')
+                input(class='form-control' type='password' name="password" placeholder='Contraseña')
+            div(class='form-group')
+                input(class='form-control' type='password' name="retrypassword" placeholder='Repetir Contraseña')
+            div(class='form-group-inline')
+                input(class='form-control-inline' type='checkbox' name="admin" checked=!!admin)   
+                |   &nbsp 
+                label(class='form-control-inline')   Administrador 
+            div(class='row no-gutters')
+                div(class='col')
+                    button(class='btn btn-default btn-block' type='submit') #{button}
+                div(class='col')
+                div(class='col')
+                    a(href='/users' class="btn btn-primary btn-block" role="button") Cancelar
+            br
+            br
+            div(class=`${message.length?'alert alert-danger':''}` role="alert") !{message}
+
+            

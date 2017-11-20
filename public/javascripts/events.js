@@ -143,4 +143,3 @@ Date.prototype.toDateInputValue = (function () {
     local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
     return local.toJSON().slice(0, 10);
 });
-

@@ -19,7 +19,7 @@ router.get(
 router.post(
     '/changepassword', [
         requireRole('user'),
-        check('oldpassword', 'Se necesita la contraseña actual.').isLength({min: 1}),
+        check('oldpassword', 'Se necesita la contraseña actual.').isLength({ min: 1 }),
         check('oldpassword')
             .custom((value, { req }) => {
                 return new Promise((resolve, reject) => {
@@ -36,8 +36,8 @@ router.post(
                     });
                 });
             }),
-        check('newpassword', 'Se necesita la nueva contraseña.').isLength({min: 1}),
-        check('retrypassword', 'Es necesario repetir la nueva contraseña.').isLength({min: 1}),
+        check('newpassword', 'Se necesita la nueva contraseña.').isLength({ min: 1 }),
+        check('retrypassword', 'Es necesario repetir la nueva contraseña.').isLength({ min: 1 }),
         check('newpassword')
             .custom((value, { req }) => {
                 return new Promise((resolve, reject) => {
@@ -57,9 +57,9 @@ router.post('/cruduser', requireRole('admin'), usersController.crudUser);
 router.post(
     '/add', [
         requireRole('admin'),
-        check('username', 'Debe especificar el usuario.').isLength({min: 1}),
-        check('password', 'Debe especificar una contraseña.').isLength({min: 1}),
-        check('retrypassword', 'Debe especificar repetir la contraseña.').isLength({min: 1}),
+        check('username', 'Debe especificar el usuario.').isLength({ min: 1 }),
+        check('password', 'Debe especificar una contraseña.').isLength({ min: 1 }),
+        check('retrypassword', 'Debe especificar repetir la contraseña.').isLength({ min: 1 }),
         check('password').custom((value, { req }) => {
             return new Promise((resolve, reject) => {
                 if (value !== req.body.retrypassword) {
@@ -71,5 +71,12 @@ router.post(
         })
     ],
     usersController.addUser);
+
+router.post(
+    '/edit', [
+        requireRole('admin'),
+        check('username', 'Debe especificar el usuario.').isLength({ min: 1 })
+    ],
+    usersController.editUser);
 
 module.exports = router;

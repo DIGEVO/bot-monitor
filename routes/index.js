@@ -4,12 +4,7 @@ const passport = require('passport');
 const router = express.Router();
 
 router.get('/',
-    (req, res) => {
-        if(req.protocol === 'http')
-            res.redirect(`https://${req.host}`);
-        else
-            res.render('login', { message: req.flash('error'), user: '' });
-    });
+    (req, res) => res.render('login', { message: req.flash('error'), user: '' }));
 
 router.get('/logout', (req, res, next) => {
     req.logout();

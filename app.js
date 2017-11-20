@@ -18,6 +18,8 @@ const index = require('./routes/index');
 const monitor = require('./routes/monitor');
 const users = require('./routes/users');
 
+require('dotenv').config();
+
 const app = express();
 
 app.set('views', path.join(__dirname, 'views'));
@@ -54,7 +56,7 @@ passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
 
 // mongoose
-mongoose.connect('mongodb://localhost/passport_local_mongoose_express4');
+mongoose.connect(process.env.MONGODB_USERDB_URI);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

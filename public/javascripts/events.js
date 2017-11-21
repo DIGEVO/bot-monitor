@@ -143,3 +143,9 @@ Date.prototype.toDateInputValue = (function () {
     local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
     return local.toJSON().slice(0, 10);
 });
+
+$(() => {
+    //Removing and odd table's row with this class(see below).
+    const elements = Array.from(document.getElementsByClassName('pagerSavedHeightSpacer'));
+    elements.forEach(e => e.remove());
+})

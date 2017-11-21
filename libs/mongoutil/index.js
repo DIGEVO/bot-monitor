@@ -1,8 +1,6 @@
 'use strict';
 
 const mongoClient = require('../mongodb');
-const NodeCache = require("node-cache");
-const cache = new NodeCache();
 
 exports.botListQuery = db =>
     db
